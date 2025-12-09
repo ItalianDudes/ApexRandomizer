@@ -30,7 +30,7 @@ public final class ApexRandomizer {
             System.setOut(new PrintStream(System.out, true, "UTF-8"));
             System.setErr(new PrintStream(System.err, true, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
-            System.err.println("An error has occurred while setting charset to UTF-8.");
+            System.err.println("Si e' verificato un errore durante l'impostazione del charset a UTF-8.");
         }
 
         final ArrayList<@NotNull Legend> PICKED_LEGENDS = new ArrayList<>();
