@@ -4,7 +4,7 @@ import it.italiandudes.apexrandomizer.enums.Legend;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -26,12 +26,8 @@ public final class ApexRandomizer {
     public static void main(String[] args) {
 
         // Setting Charset to UTF-8
-        try {
-            System.setOut(new PrintStream(System.out, true, "UTF-8"));
-            System.setErr(new PrintStream(System.err, true, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            System.err.println("Si e' verificato un errore durante l'impostazione del charset a UTF-8.");
-        }
+        System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
+        System.setErr(new PrintStream(System.err, true, StandardCharsets.UTF_8));
 
         final ArrayList<@NotNull Legend> PICKED_LEGENDS = new ArrayList<>();
         for (String player : PLAYER_EXCLUDED_LEGENDS.keySet()) {
