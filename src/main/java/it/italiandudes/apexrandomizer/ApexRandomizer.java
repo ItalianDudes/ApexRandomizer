@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.Predicate;
+
 import static it.italiandudes.apexrandomizer.enums.Legend.*;
 
 public final class ApexRandomizer {
