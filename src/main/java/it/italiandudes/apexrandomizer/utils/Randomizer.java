@@ -1,4 +1,4 @@
-package it.italiandudes.apexrandomizer;
+package it.italiandudes.apexrandomizer.utils;
 
 import it.italiandudes.apexrandomizer.enums.Legend;
 import it.italiandudes.apexrandomizer.enums.Weapon;

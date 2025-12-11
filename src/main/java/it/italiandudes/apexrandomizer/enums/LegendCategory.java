@@ -2,7 +2,10 @@ package it.italiandudes.apexrandomizer.enums;
 
 import org.jetbrains.annotations.NotNull;
 
-public enum LegendType {
+import java.util.Arrays;
+import java.util.List;
+
+public enum LegendCategory {
     ASSAULT("Assalto"),
     SKIRMISHER("Combattente"),
     RECON("Ricognizione"),
@@ -12,8 +15,14 @@ public enum LegendType {
     // Attributes
     @NotNull private final String name;
 
+    // Static
+    @NotNull private static final List<@NotNull LegendCategory> LEGEND_CATEGORIES_LIST = Arrays.stream(LegendCategory.values()).toList();
+    public static @NotNull List<@NotNull LegendCategory> getLegendCategoriesList() {
+        return LEGEND_CATEGORIES_LIST;
+    }
+
     // Constructor
-    LegendType(@NotNull final String name) {
+    LegendCategory(@NotNull final String name) {
         this.name = name;
     }
 

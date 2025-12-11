@@ -8,6 +8,7 @@ public enum AmmoType {
     LIGHT("Munizioni Leggere"),
     SHOTGUN("Cartucce Shotgun"),
     SNIPER("Munizioni per Cecchino"),
+    ARROW("Munizioni per Arco"),
     MYTHIC("Munizioni Mitiche");
 
     // Attributes
