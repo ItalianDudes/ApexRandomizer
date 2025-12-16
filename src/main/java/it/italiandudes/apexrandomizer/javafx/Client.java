@@ -61,7 +61,7 @@ public final class Client extends Application {
         });
 
         // Notice into the logs that the application started Successfully
-        Logger.log("Post completed, D&D Visualizer started successfully!", Defs.LOGGER_CONTEXT);
+        Logger.log("Post completed, ApexRandomizer started successfully!", Defs.LOGGER_CONTEXT);
     }
 
     // Start Method
@@ -113,7 +113,7 @@ public final class Client extends Application {
         if (code != 0) {
             Logger.log("Exit Method Called with non-zero code " + code + ", this probably means an error has occurred.", Defs.LOGGER_CONTEXT);
         } else {
-            Logger.log("Exit Method Called, exiting HellRandomizer...", Defs.LOGGER_CONTEXT);
+            Logger.log("Exit Method Called, exiting ApexRandomizer...", Defs.LOGGER_CONTEXT);
         }
         Platform.runLater(() -> STAGE.hide());
         Logger.close();
