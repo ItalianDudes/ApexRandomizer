@@ -68,13 +68,11 @@ public final class ControllerSceneTabRandomizer {
             playersSceneControllers.add(newPlayer);
             vBoxPlayersContainer.getChildren().add(newPlayer.getParent());
         }
-        /*
         sortedPlayersSceneControllers = playersSceneControllers.stream().sorted((o1, o2) -> {
             ControllerScenePlayerPane p1 = (ControllerScenePlayerPane) o1.getController();
             ControllerScenePlayerPane p2 = (ControllerScenePlayerPane) o2.getController();
             return Integer.compare(p2.getPlayerData().getLegends().size(), p1.getPlayerData().getLegends().size()) * -1;
-        }).collect(Collectors.toList());*/
-        sortedPlayersSceneControllers = playersSceneControllers;
+        }).collect(Collectors.toList());
     }
     @NotNull
     public List<@NotNull PlayerData> getPlayersEnabledForRandomizer() {
@@ -84,9 +82,9 @@ public final class ControllerSceneTabRandomizer {
                 .collect(Collectors.toList());
     }
     private void randomizeAll() {
-        for (SceneController sceneHelldiverPane : sortedPlayersSceneControllers) {
-            Randomizer.RANDOMIZED_LEGENDS_BUFFER.clear();
-            ((ControllerScenePlayerPane) sceneHelldiverPane.getController()).randomizeAll();
+        Randomizer.RANDOMIZED_LEGENDS_BUFFER.clear();
+        for (SceneController scenePlayerPane : sortedPlayersSceneControllers) {
+            ((ControllerScenePlayerPane) scenePlayerPane.getController()).randomizeAll();
         }
     }
 

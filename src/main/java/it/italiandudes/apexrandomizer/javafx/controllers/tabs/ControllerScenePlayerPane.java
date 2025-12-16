@@ -5,6 +5,7 @@ import it.italiandudes.apexrandomizer.enums.*;
 import it.italiandudes.apexrandomizer.javafx.JFXDefs;
 import it.italiandudes.apexrandomizer.utils.Randomizer;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import org.jetbrains.annotations.NotNull;
@@ -70,6 +71,7 @@ public final class ControllerScenePlayerPane {
     }
     public void setLegendCategory(@NotNull final LegendCategory legendCategory) {
         Randomizer.RANDOMIZED_LEGENDS_BUFFER.remove(randomizedLegend);
+        randomizedLegend = null;
         labelLegend.setText("Categoria Leggenda:");
         labelPlayerLegend.setText(legendCategory.toString());
     }
@@ -121,6 +123,7 @@ public final class ControllerScenePlayerPane {
                     legend = Randomizer.randomizeLegendFromPlayerData(playerData);
                 } while (Randomizer.RANDOMIZED_LEGENDS_BUFFER.contains(legend));
                 setLegend(legend);
+                randomizeSling(null);
             }
             case RANDOMIZE_LEGEND_CATEGORY -> setLegendCategory(Randomizer.randomizeLegendCategoryFromPlayerData(playerData));
         }
@@ -144,28 +147,19 @@ public final class ControllerScenePlayerPane {
         }
     }
     @FXML
-    private void randomizeSling() {
-        if (randomizedLegend != Legend.BALLISTIC) setSlingWeapon(null);
-        else switch (playerData.getWeaponRandomizationRule()) {
+    private void randomizeSling(@Nullable ActionEvent event) {
+        if (event != null || randomizedLegend == Legend.BALLISTIC)switch (playerData.getWeaponRandomizationRule()) {
             case NO_WEAPON_RANDOMIZATION -> setSlingWeapon(null);
             case RANDOMIZE_WEAPON -> setSlingWeapon(Randomizer.randomizeWeaponFromPlayerData(playerData));
             case RANDOMIZE_WEAPON_CATEGORY -> setSlingWeaponCategory(Randomizer.randomizeWeaponCategoryFromPlayerData(playerData));
             case RANDOMIZE_WEAPON_AMMO -> setSlingWeaponAmmoType(Randomizer.randomizeAmmoTypeFromPlayerData(playerData));
-        }
+        } else setSlingWeapon(null);
     }
-    /*
-    private void randomizeBooster() {
-        if (randomizedBooster != null) {
-            Randomizer.removeBoosterFromBoostersHistory(randomizedBooster);
-            randomizedBooster = null;
-        }
-        setBooster(Randomizer.randomizeBooster(playerData));
-    }*/
     @FXML
     public void randomizeAll() {
         randomizeLegend();
         randomizeFirst();
         randomizeSecond();
-        randomizeSling();
+        randomizeSling(null);
     }
 }
