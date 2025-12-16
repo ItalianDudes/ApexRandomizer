@@ -82,6 +82,13 @@ tasks.register('runClient', Exec) {
     standardInput = System.in
     commandLine "java", "-jar", jar.archiveFile.get()
 }
+tasks.register('runNoguiClient', Exec) {
+    dependsOn buildJar
+    group = "Execution"
+    description = "Build, assemble and run DnD_Visualizer for the current platform with arg -nogui"
+    standardInput = System.in
+    commandLine "java", "-jar", jar.archiveFile.get(), "-nogui"
+}
 
 
 // Deployment Tasks
