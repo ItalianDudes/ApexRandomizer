@@ -455,11 +455,11 @@ public final class ControllerSceneTabPlayersData {
             PlayerData newData = new PlayerData(
                     newPlayer, toggleButtonRandomizePlayer.isSelected(),
                     legendRandomizationRule, weaponRandomizationRule,
-                    legendCategories,
-                    legends,
-                    weaponCategories,
-                    ammoTypes,
-                    weapons
+                    playerLegendCategories,
+                    playerLegends,
+                    playerWeaponCategories,
+                    playerAmmoTypes,
+                    playerWeapons
             );
             PlayerDataManager.getInstance().getPlayersData().add(newData);
             listViewPlayersData.getItems().add(newData);
