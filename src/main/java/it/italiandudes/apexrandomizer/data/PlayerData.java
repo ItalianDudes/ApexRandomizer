@@ -168,8 +168,6 @@ public final class PlayerData {
         playerData.put("prevent_combo_sniper_marksman", preventComboSniperMarksman);
         playerData.put("ignore_randomization_rules_for_sling", ignoreRandomizationRulesForSling);
 
-        System.err.println(playerData.toString(2));
-
         return playerData;
     }
 

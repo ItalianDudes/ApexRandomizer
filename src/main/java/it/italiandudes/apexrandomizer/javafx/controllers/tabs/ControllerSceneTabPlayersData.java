@@ -306,7 +306,10 @@ public final class ControllerSceneTabPlayersData {
                 JFXDefs.startServiceTask(() -> {
                     try {
                         PlayerDataManager.getInstance().savePlayerData();
-                        Platform.runLater(() -> new InformationAlert("SUCCESSO", "Rinominazione Giocatore", "Rinominazione avvenuta con successo!"));
+                        Platform.runLater(() -> {
+                            mainMenuController.getTabRandomizerController().loadPlayerScenes();
+                            new InformationAlert("SUCCESSO", "Rinominazione Giocatore", "Rinominazione avvenuta con successo!");
+                        });
                     } catch (IOException e) {
                         Logger.log(e);
                         Platform.runLater(() -> new ErrorAlert("ERRORE", "Errore di I/O", "Si e' verificato un errore durante la scrittura dei dati."));
