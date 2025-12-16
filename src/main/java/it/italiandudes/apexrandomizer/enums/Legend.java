@@ -41,8 +41,12 @@ public enum Legend {
 
     // Static
     @NotNull private static final List<@NotNull Legend> LEGENDS_LIST = Arrays.stream(Legend.values()).toList();
+    @NotNull private static final List<@NotNull Legend> STARTING_LEGENDS_LIST = List.of(BANGALORE, PATHFINDER, WRAITH, BLOODHOUND, GIBRALTAR, LIFELINE);
     public static @NotNull List<@NotNull Legend> getLegendsList() {
         return LEGENDS_LIST;
+    }
+    public static @NotNull List<@NotNull Legend> getStartingLegendsList() {
+        return STARTING_LEGENDS_LIST;
     }
 
     // Constructors

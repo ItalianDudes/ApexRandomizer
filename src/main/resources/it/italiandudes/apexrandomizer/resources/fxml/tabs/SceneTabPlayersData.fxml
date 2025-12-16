@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--suppress JavaFxDefaultTag -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21.0.7" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.italiandudes.apexrandomizer.javafx.controllers.tabs.ControllerSceneTabPlayersData">
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <children>
+      <GridPane layoutX="5.0" layoutY="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints valignment="CENTER" vgrow="NEVER" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+         </rowConstraints>
+         <children>
+            <Label styleClass="tabTitle" text="DATI DEI GIOCATORI" />
+            <GridPane hgap="10.0" vgap="5.0" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <ListView fx:id="listViewPlayersData" onContextMenuRequested="#showPlayersContextMenu" GridPane.rowIndex="1" />
+                  <GridPane fx:id="gridPanePlayersDataContainer" vgap="10.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                     </rowConstraints>
+                     <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                           <content>
+                              <GridPane fx:id="gridPanePlayerData" disable="true" vgap="10.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane hgap="10.0" vgap="10.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+                                          <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Randomizza Giocatore" />
+                                          <ToggleButton fx:id="toggleButtonRandomizePlayer" mnemonicParsing="false" onAction="#stageChanges" GridPane.columnIndex="1">
+                                             <graphic>
+                                                <ImageView fx:id="imageViewToggleRandomizePlayer" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic>
+                                          </ToggleButton>
+                                          <Label text="Criterio Randomizzazione Leggenda" GridPane.rowIndex="1" />
+                                          <Label text="Criterio Randomizzazione Armi" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="comboBoxLegendRandomizationRule" onAction="#stageChanges" promptText="Seleziona un Criterio" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="comboBoxWeaponsRandomizationRule" onAction="#stageChanges" promptText="Seleziona un Criterio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane hgap="10.0" vgap="5.0" GridPane.rowIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="NEVER" />
+                                          <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="LEGGENDE GIOCATORE" GridPane.rowIndex="3" />
+                                          <Label text="LEGGENDE" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <Label text="ARMI GIOCATORE" GridPane.rowIndex="12" />
+                                          <TextField fx:id="textFieldSearchFromPlayerWeapons" promptText="Cerca..." GridPane.rowIndex="13" />
+                                          <ListView fx:id="listViewPlayerWeapons" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.rowIndex="14" />
+                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="14">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addToPlayerWeapons">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#removeFromPlayerWeapons" GridPane.rowIndex="1">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                          <Label text="ARMI" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                                          <TextField fx:id="textFieldSearchFromWeapons" promptText="Cerca..." GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                                          <ListView fx:id="listViewWeapons" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addToPlayerLegends">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#removeFromPlayerLegends" GridPane.rowIndex="1">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addToPlayerWeaponCategories">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#removeFromPlayerWeaponCategories" GridPane.rowIndex="1">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                          <TextField fx:id="textFieldSearchFromPlayerLegends" promptText="Cerca..." GridPane.rowIndex="4" />
+                                          <TextField fx:id="textFieldSearchFromLegends" promptText="Cerca..." GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <ListView fx:id="listViewPlayerLegends" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.rowIndex="5" />
+                                          <ListView fx:id="listViewLegends" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <Label text="CATEGORIE ARMI GIOCATORE" GridPane.rowIndex="6" />
+                                          <Label text="CATEGORIE ARMI" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <TextField fx:id="textFieldSearchFromPlayerWeaponCategories" promptText="Cerca..." GridPane.rowIndex="7" />
+                                          <TextField fx:id="textFieldSearchFromWeaponCategories" promptText="Cerca..." GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                          <ListView fx:id="listViewPlayerWeaponCategories" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.rowIndex="8" />
+                                          <ListView fx:id="listViewWeaponCategories" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                          <Label text="TIPI DI MUNIZIONI GIOCATORE" GridPane.rowIndex="9" />
+                                          <Label text="TIPI DI MUNIZIONI" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                          <TextField fx:id="textFieldSearchFromPlayerAmmoTypes" promptText="Cerca..." GridPane.rowIndex="10" />
+                                          <TextField fx:id="textFieldSearchFromAmmoTypes" promptText="Cerca..." GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                                          <ListView fx:id="listViewPlayerAmmoTypes" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.rowIndex="11" />
+                                          <ListView fx:id="listViewAmmoTypes" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addToPlayerAmmoTypes">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#removeFromPlayerAmmoTypes" GridPane.rowIndex="1">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                          <Label text="CATEGORIE LEGGENDE GIOCATORE" />
+                                          <Label text="CATEGORIE LEGGENDE" GridPane.columnIndex="2" />
+                                          <TextField fx:id="textFieldSearchFromPlayerLegendCategories" promptText="Cerca..." GridPane.rowIndex="1" />
+                                          <TextField fx:id="textFieldSearchFromLegendCategories" promptText="Cerca..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <ListView fx:id="listViewPlayerLegendCategories" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.rowIndex="2" />
+                                          <ListView fx:id="listViewLegendCategories" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addToPlayerLegendCategories">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#removeFromPlayerLegendCategories" GridPane.rowIndex="1">
+                                                   <graphic>
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../image/arrow-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                        <GridPane hgap="10.0" GridPane.rowIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Button fx:id="buttonRevertChanges" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#revertChanges" text="ANNULLA MODIFICHE GIOCATORE" />
+                              <Button fx:id="buttonSaveChanges" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveChanges" text="SALVA MODIFICHE GIOCATORE" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+                  <Label text="Giocatori Registrati" />
+                  <Label text="Dati Giocatore" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

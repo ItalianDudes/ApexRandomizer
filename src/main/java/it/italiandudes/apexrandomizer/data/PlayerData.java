@@ -3,6 +3,7 @@ package it.italiandudes.apexrandomizer.data;
 import it.italiandudes.apexrandomizer.enums.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,19 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 @EqualsAndHashCode
 public final class PlayerData {
 
     // Attributes
-    @NotNull private final String username;
-    private final boolean isPlayerEnabled;
-    private final LegendRandomizationRule legendRandomizationRule;
-    private final WeaponRandomizationRule weaponRandomizationRule;
-    @NotNull private final List<@NotNull Legend> randomizableLegends;
-    @NotNull private final List<@NotNull LegendCategory> randomizableLegendCategories;
-    @NotNull private final List<@NotNull Weapon> randomizableWeapons;
-    @NotNull private final List<@NotNull WeaponCategory> randomizableWeaponCategories;
-    @NotNull private final List<@NotNull AmmoType> randomizableAmmoTypes;
+    @NotNull private String username;
+    private boolean isPlayerEnabled;
+    private LegendRandomizationRule legendRandomizationRule;
+    private WeaponRandomizationRule weaponRandomizationRule;
+    @NotNull private List<@NotNull LegendCategory> legendCategories;
+    @NotNull private List<@NotNull Legend> legends;
+    @NotNull private List<@NotNull WeaponCategory> weaponCategories;
+    @NotNull private List<@NotNull AmmoType> ammoTypes;
+    @NotNull private List<@NotNull Weapon> weapons;
 
     // Randomization Flags
     private boolean preventSameWeaponRandomization = false;
@@ -34,93 +36,80 @@ public final class PlayerData {
     private boolean ignoreRandomizationRulesForSling = false;
 
     // Constructors
+
+    public PlayerData(
+            @NotNull String username, boolean isPlayerEnabled, LegendRandomizationRule legendRandomizationRule,
+            WeaponRandomizationRule weaponRandomizationRule, @NotNull List<@NotNull LegendCategory> legendCategories,
+            @NotNull List<@NotNull Legend> legends, @NotNull List<@NotNull WeaponCategory> weaponCategories,
+            @NotNull List<@NotNull AmmoType> ammoTypes, @NotNull List<@NotNull Weapon> weapons,
+            boolean preventSameWeaponRandomization, boolean preventSameWeaponCategoryRandomization,
+            boolean preventMultipleSniper, boolean preventMultipleMarksman, boolean preventComboSniperMarksman,
+            boolean ignoreRandomizationRulesForSling) {
+        this.username = username;
+        this.isPlayerEnabled = isPlayerEnabled;
+        this.legendRandomizationRule = legendRandomizationRule;
+        this.weaponRandomizationRule = weaponRandomizationRule;
+        this.legendCategories = new ArrayList<>(legendCategories);
+        this.legends = new ArrayList<>(legends);
+        this.weaponCategories = new ArrayList<>(weaponCategories);
+        this.ammoTypes = new ArrayList<>(ammoTypes);
+        this.weapons = new ArrayList<>(weapons);
+        this.preventSameWeaponRandomization = preventSameWeaponRandomization;
+        this.preventSameWeaponCategoryRandomization = preventSameWeaponCategoryRandomization;
+        this.preventMultipleSniper = preventMultipleSniper;
+        this.preventMultipleMarksman = preventMultipleMarksman;
+        this.preventComboSniperMarksman = preventComboSniperMarksman;
+        this.ignoreRandomizationRulesForSling = ignoreRandomizationRulesForSling;
+    }
+    public PlayerData(
+            @NotNull String username, boolean isPlayerEnabled, LegendRandomizationRule legendRandomizationRule,
+            WeaponRandomizationRule weaponRandomizationRule, @NotNull List<@NotNull LegendCategory> legendCategories,
+            @NotNull List<@NotNull Legend> legends, @NotNull List<@NotNull WeaponCategory> weaponCategories,
+            @NotNull List<@NotNull AmmoType> ammoTypes, @NotNull List<@NotNull Weapon> weapons) {
+        this.username = username;
+        this.isPlayerEnabled = isPlayerEnabled;
+        this.legendRandomizationRule = legendRandomizationRule;
+        this.weaponRandomizationRule = weaponRandomizationRule;
+        this.legendCategories = new ArrayList<>(legendCategories);
+        this.legends = new ArrayList<>(legends);
+        this.weaponCategories = new ArrayList<>(weaponCategories);
+        this.ammoTypes = new ArrayList<>(ammoTypes);
+        this.weapons = new ArrayList<>(weapons);
+    }
     public PlayerData(@NotNull final JSONObject playerData) {
 
-        // Username
         this.username = playerData.getString("username");
-
-        // Is Player Enabled for Randomization
         this.isPlayerEnabled = playerData.getBoolean("is_player_enabled");
 
-        if (!isPlayerEnabled) {
-            legendRandomizationRule = LegendRandomizationRule.NO_LEGEND_RANDOMIZATION;
-            weaponRandomizationRule = WeaponRandomizationRule.NO_WEAPON_RANDOMIZATION;
-            randomizableLegends = new ArrayList<>();
-            randomizableLegendCategories = new ArrayList<>();
-            randomizableWeapons = new ArrayList<>();
-            randomizableWeaponCategories = new ArrayList<>();
-            randomizableAmmoTypes = new ArrayList<>();
-            return;
-        }
-
-        // Randomize Legends?
+        // Legends
         this.legendRandomizationRule = LegendRandomizationRule.values()[playerData.getInt("legend_randomization_rule")];
-        if (legendRandomizationRule != LegendRandomizationRule.NO_LEGEND_RANDOMIZATION) {
-
-            // Legend Category List
-            List<LegendCategory> playerLegendCategoriesBlacklist = new ArrayList<>();
-            JSONArray legendCategoriesBlacklistArray = playerData.getJSONArray("legend_categories_blacklist_array");
-            for (int i = 0; i < legendCategoriesBlacklistArray.length(); i++) {
-                playerLegendCategoriesBlacklist.add(LegendCategory.valueOf(legendCategoriesBlacklistArray.getString(i)));
-            }
-            this.randomizableLegendCategories = LegendCategory.getLegendCategoriesList().stream().filter(category -> !playerLegendCategoriesBlacklist.contains(category)).toList();
-
-            // Legend List
-            List<Legend> playerLegendList;
-            boolean isLegendListWhitelist = playerData.getBoolean("is_legend_list_whitelist");
-            JSONArray legendArray = playerData.getJSONArray("legend_array");
-            List<Legend> configLegendList = new ArrayList<>();
-            for (int i = 0; i < legendArray.length(); i++) {
-                configLegendList.add(Legend.valueOf(legendArray.getString(i)));
-            }
-            if (isLegendListWhitelist) playerLegendList = configLegendList;
-            else if (configLegendList.isEmpty()) playerLegendList = Legend.getLegendsList();
-            else playerLegendList = Legend.getLegendsList().stream().filter(legend -> !configLegendList.contains(legend)).toList();
-
-            // Final Legend List
-            this.randomizableLegends = playerLegendList.stream().filter(legend -> !playerLegendCategoriesBlacklist.contains(legend.getLegendCategory())).toList();
-        } else {
-            this.randomizableLegends = new ArrayList<>();
-            this.randomizableLegendCategories = new ArrayList<>();
+        this.legendCategories = new ArrayList<>();
+        JSONArray legendCategoriesArray = playerData.getJSONArray("legend_categories");
+        for (int i=0; i<legendCategoriesArray.length(); i++) {
+            this.legendCategories.add(LegendCategory.valueOf(legendCategoriesArray.getString(i)));
+        }
+        this.legends = new ArrayList<>();
+        JSONArray legendsArray = playerData.getJSONArray("legends");
+        for (int i=0; i<legendsArray.length(); i++) {
+            this.legends.add(Legend.valueOf(legendsArray.getString(i)));
         }
 
-        // Randomize Weapons?
+        // Weapons
         this.weaponRandomizationRule = WeaponRandomizationRule.values()[playerData.getInt("weapon_randomization_rule")];
-        if (weaponRandomizationRule != WeaponRandomizationRule.NO_WEAPON_RANDOMIZATION) {
-
-            // Weapon Category List
-            List<WeaponCategory> playerWeaponCategoriesBlacklist = new ArrayList<>();
-            JSONArray weaponCategoryArray = playerData.getJSONArray("weapon_categories_blacklist_array");
-            for (int i = 0; i < weaponCategoryArray.length(); i++) {
-                playerWeaponCategoriesBlacklist.add(WeaponCategory.valueOf(weaponCategoryArray.getString(i)));
-            }
-            this.randomizableWeaponCategories = WeaponCategory.getWeaponCategoriesList().stream().filter(category -> !playerWeaponCategoriesBlacklist.contains(category)).toList();
-
-            // Weapon Ammo Type List
-            this.randomizableAmmoTypes = new ArrayList<>();
-            JSONArray ammoTypeArray = playerData.getJSONArray("ammo_type_whitelist_array");
-            for (int i=0; i<ammoTypeArray.length(); i++) {
-                this.randomizableAmmoTypes.add(AmmoType.valueOf(ammoTypeArray.getString(i)));
-            }
-
-            // Weapon List
-            List<Weapon> playerWeaponList;
-            boolean isWeaponListWhitelist = playerData.getBoolean("is_weapons_list_whitelist");
-            JSONArray weaponArray = playerData.getJSONArray("weapon_array");
-            List<Weapon> configWeaponList = new ArrayList<>();
-            for (int i = 0; i < weaponArray.length(); i++) {
-                configWeaponList.add(Weapon.valueOf(weaponArray.getString(i)));
-            }
-            if (isWeaponListWhitelist) playerWeaponList = configWeaponList;
-            else if (configWeaponList.isEmpty()) playerWeaponList = Weapon.getWeaponsList();
-            else playerWeaponList = Weapon.getWeaponsList().stream().filter(weapon -> !configWeaponList.contains(weapon)).toList();
-
-            // Final Weapon List
-            this.randomizableWeapons = playerWeaponList.stream().filter(weapon -> !playerWeaponCategoriesBlacklist.contains(weapon.getWeaponCategory())).toList();
-        } else {
-            this.randomizableWeapons = new ArrayList<>();
-            this.randomizableWeaponCategories = new ArrayList<>();
-            this.randomizableAmmoTypes = new ArrayList<>();
+        this.weaponCategories = new ArrayList<>();
+        JSONArray weaponCategoriesArray = playerData.getJSONArray("weapon_categories");
+        for (int i=0; i<weaponCategoriesArray.length(); i++) {
+            this.weaponCategories.add(WeaponCategory.valueOf(weaponCategoriesArray.getString(i)));
+        }
+        this.ammoTypes = new ArrayList<>();
+        JSONArray ammoTypesArray = playerData.getJSONArray("ammo_types");
+        for (int i=0; i<ammoTypesArray.length(); i++) {
+            this.ammoTypes.add(AmmoType.valueOf(ammoTypesArray.getString(i)));
+        }
+        this.weapons = new ArrayList<>();
+        JSONArray weaponsArray = playerData.getJSONArray("weapons");
+        for (int i=0; i<weaponsArray.length(); i++) {
+            this.weapons.add(Weapon.valueOf(weaponsArray.getString(i)));
         }
 
         // Randomization Flags
@@ -130,5 +119,63 @@ public final class PlayerData {
         this.preventMultipleMarksman = playerData.getBoolean("prevent_multiple_marksman");
         this.preventComboSniperMarksman = playerData.getBoolean("prevent_combo_sniper_marksman");
         this.ignoreRandomizationRulesForSling = playerData.getBoolean("ignore_randomization_rules_for_sling");
+    }
+
+    // Methods
+    public JSONObject toJSON() {
+        JSONObject playerData = new JSONObject();
+
+        playerData.put("username", username);
+        playerData.put("is_player_enabled", isPlayerEnabled);
+
+        playerData.put("legend_randomization_rule", legendRandomizationRule.ordinal());
+        playerData.put("weapon_randomization_rule", weaponRandomizationRule.ordinal());
+
+        JSONArray legendCategoriesArray = new JSONArray();
+        for (LegendCategory category : legendCategories) {
+            legendCategoriesArray.put(category.name());
+        }
+        playerData.put("legend_categories", legendCategoriesArray);
+
+        JSONArray legendsArray = new JSONArray();
+        for (Legend legend : legends) {
+            legendsArray.put(legend.name());
+        }
+        playerData.put("legends", legendsArray);
+
+        JSONArray weaponCategoriesArray = new JSONArray();
+        for (WeaponCategory category : weaponCategories) {
+            weaponCategoriesArray.put(category.name());
+        }
+        playerData.put("weapon_categories", weaponCategoriesArray);
+
+        JSONArray ammoTypesArray = new JSONArray();
+        for (AmmoType ammoType : ammoTypes) {
+            ammoTypesArray.put(ammoType.name());
+        }
+        playerData.put("ammo_types", ammoTypesArray);
+
+        JSONArray weaponsArray = new JSONArray();
+        for (Weapon weapon : weapons) {
+            weaponsArray.put(weapon.name());
+        }
+        playerData.put("weapons", weaponsArray);
+
+        playerData.put("prevent_same_weapon_randomization", preventSameWeaponRandomization);
+        playerData.put("prevent_same_weapon_category_randomization", preventSameWeaponCategoryRandomization);
+        playerData.put("prevent_multiple_sniper", preventMultipleSniper);
+        playerData.put("prevent_multiple_marksman", preventMultipleMarksman);
+        playerData.put("prevent_combo_sniper_marksman", preventComboSniperMarksman);
+        playerData.put("ignore_randomization_rules_for_sling", ignoreRandomizationRulesForSling);
+
+        System.err.println(playerData.toString(2));
+
+        return playerData;
+    }
+
+    // ToString
+    @Override @NotNull
+    public String toString() {
+        return username;
     }
 }

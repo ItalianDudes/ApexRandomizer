@@ -1,7 +1,9 @@
 package it.italiandudes.apexrandomizer.utils;
 
-import it.italiandudes.apexrandomizer.ApexRandomizer;
+import it.italiandudes.apexrandomizer.ApexRandomizer_OLD;
+import it.italiandudes.idl.common.TargetPlatform;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.InputStream;
@@ -11,6 +13,10 @@ import java.util.Objects;
 
 public final class Defs {
 
+    // Current Platform
+    @Nullable
+    public static final TargetPlatform CURRENT_PLATFORM = TargetPlatform.getCurrentPlatform();
+
     // Logger Context
     public static final String LOGGER_CONTEXT = "Apex Randomizer";
 
@@ -18,7 +24,7 @@ public final class Defs {
     public static final String JAR_POSITION;
     static {
         try {
-            JAR_POSITION = new File(ApexRandomizer.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
+            JAR_POSITION = new File(ApexRandomizer_OLD.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -32,10 +38,10 @@ public final class Defs {
 
         //Resource Getters
         public static URL get(@NotNull final String resourceConst) {
-            return Objects.requireNonNull(ApexRandomizer.class.getResource(resourceConst));
+            return Objects.requireNonNull(ApexRandomizer_OLD.class.getResource(resourceConst));
         }
         public static InputStream getAsStream(@NotNull final String resourceConst) {
-            return Objects.requireNonNull(ApexRandomizer.class.getResourceAsStream(resourceConst));
+            return Objects.requireNonNull(ApexRandomizer_OLD.class.getResourceAsStream(resourceConst));
         }
 
         // JSON

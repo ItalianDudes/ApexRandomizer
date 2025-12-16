@@ -1,0 +1,12 @@
+/* Root */
+.root {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-background: #252525;
+    -fx-base: #252525;
+}
+
+.tabTitle {
+    -fx-font-weight: bold;
+    -fx-font-size: 32px;
+}

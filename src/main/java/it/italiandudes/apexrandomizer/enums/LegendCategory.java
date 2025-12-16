@@ -17,8 +17,12 @@ public enum LegendCategory {
 
     // Static
     @NotNull private static final List<@NotNull LegendCategory> LEGEND_CATEGORIES_LIST = Arrays.stream(LegendCategory.values()).toList();
+    @NotNull private static final List<@NotNull LegendCategory> STARTING_LEGEND_CATEGORIES_LIST = List.of(ASSAULT, SKIRMISHER, RECON, SUPPORT);
     public static @NotNull List<@NotNull LegendCategory> getLegendCategoriesList() {
         return LEGEND_CATEGORIES_LIST;
+    }
+    public static @NotNull List<@NotNull LegendCategory> getStartingLegendCategoriesList() {
+        return STARTING_LEGEND_CATEGORIES_LIST;
     }
 
     // Constructor
